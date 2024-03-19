@@ -4,10 +4,6 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-import google.auth
-from google.oauth2 import service_account
-
-credentials = service_account.Credentials.from_service_account_file('savvy-aileron-417713-9a491b81f0eb.json')
 genai.configure(api_key=os.getenv("AIzaSyAr5Y0PkiBcud22VdAns_MliATO-zPv9Mc"))
 
 model = genai.GenerativeModel("gemini-pro")
@@ -38,4 +34,4 @@ def chatbot():
     return jsonify({'response': response_text.strip()})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run("0.0.0.0",port = 5003,debug=True,use_reloader=True)
