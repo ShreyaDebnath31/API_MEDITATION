@@ -1,12 +1,18 @@
-runtime : python
-env : flex
-entrypoint : gunicorn -b :$app_final:app
+runtime: python37
+env: flex
 
-runtime config:
-  python version: 3
-manual_scaling:
-  instances: 1
-resources:
-  cpu: 1
-  memory gb: 0.5
-  disk_size_gb: 10
+handlers:
+- url: /.*
+  script: auto
+
+runtime_config:
+  python_version: 3
+
+env_variables:
+  AI_KEY: "AIzaSyAr5Y0PkiBcud22VdAns_MliATO-zPv9Mc"
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 5
+  cpu_utilization:
+    target_utilization: 0.65
